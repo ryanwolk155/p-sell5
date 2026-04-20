@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Abrindo WhatsApp...</title>
+
+<script>
+const LINK_FINAL =
+"https://wa.me/5511991663742?text=Oii%20Nayara%2C%20te%20vi%20no%20tiktok%20e%20quero%20comprar%20seus%20conte%C3%BAdos!";
+
+/*
+=========================================
+DETECTA NAVEGADOR INTERNO
+=========================================
+*/
+function navegadorInterno(){
+
+    const ua = navigator.userAgent.toLowerCase();
+
+    return (
+        ua.includes("tiktok") ||
+        ua.includes("musical_ly") ||
+        ua.includes("bytedance") ||
+        ua.includes("ttwebview") ||
+        ua.includes("aweme") ||
+
+        ua.includes("instagram") ||
+        ua.includes("fbav") ||
+        ua.includes("fban") ||
+        ua.includes("fb_iab") ||
+
+        ua.includes("kwai") ||
+        ua.includes("kuaishou") ||
+
+        ua.includes("twitter") ||
+        ua.includes("x-client") ||
+
+        ua.includes("wv") ||
+        ua.includes("webview")
+    );
+}
+
+/*
+=========================================
+ABRIR WHATSAPP
+=========================================
+*/
+function abrirWhats(){
+    window.location.href = LINK_FINAL;
+}
+
+/*
+=========================================
+PRESELL AUTOMÁTICA
+=========================================
+*/
+function iniciarPresell(){
+
+    document.getElementById("tutorial").style.display = "none";
+    document.getElementById("presell").style.display = "block";
+
+    let p = 0;
+
+    const barra = document.getElementById("barra");
+    const txt = document.getElementById("percent");
+
+    const timer = setInterval(()=>{
+
+        p += 5;
+
+        barra.style.width = p + "%";
+        txt.innerHTML = p + "%";
+
+        if(p >= 100){
+
+            clearInterval(timer);
+
+            setTimeout(()=>{
+                abrirWhats();
+            },400);
+        }
+
+    },100);
+}
+
+/*
+=========================================
+AO CARREGAR
+=========================================
+*/
+window.onload = function(){
+
+    if(navegadorInterno()){
+
+        document.getElementById("tutorial").style.display = "block";
+
+    }else{
+
+        iniciarPresell();
+    }
+}
+</script>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+background:#f5f5f5;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:20px;
+}
+
+.box{
+background:#fff;
+width:100%;
+max-width:420px;
+border-radius:22px;
+padding:30px 25px;
+box-shadow:0 10px 35px rgba(0,0,0,.12);
+text-align:center;
+}
+
+h1{
+font-size:28px;
+margin-bottom:18px;
+color:#111;
+line-height:1.3;
+}
+
+.step{
+margin-top:18px;
+padding:18px;
+border-radius:16px;
+background:#f1f1f1;
+font-size:20px;
+font-weight:bold;
+line-height:1.5;
+color:#111;
+}
+
+.arrow{
+font-size:38px;
+margin-top:10px;
+}
+
+small{
+display:block;
+margin-top:22px;
+font-size:15px;
+color:#666;
+line-height:1.5;
+}
+
+.bar{
+width:100%;
+height:18px;
+background:#ddd;
+border-radius:30px;
+overflow:hidden;
+margin-top:25px;
+}
+
+.fill{
+height:100%;
+width:0%;
+background:#25D366;
+}
+
+.percent{
+font-size:30px;
+font-weight:bold;
+margin-top:18px;
+color:#111;
+}
+
+#tutorial{
+display:none;
+}
+
+#presell{
+display:none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- BLOQUEIO NAVEGADOR INTERNO -->
+<div class="box" id="tutorial">
+
+<h1>⚠️ PARA CONTINUAR</h1>
+
+<div class="step">
+1️⃣ Clique nos <br><b>3 pontinhos acima</b>
+<div class="arrow">↗️</div>
+</div>
+
+<div class="step">
+2️⃣ Depois clique em <br><b>Abrir no navegador</b>
+<div class="arrow">🌐</div>
+</div>
+
+<small>
+Assim que abrir no navegador externo,<br>
+o WhatsApp abrirá automaticamente.
+</small>
+
+</div>
+
+<!-- PRESELL -->
+<div class="box" id="presell">
+
+<h1>Preparando seu acesso...</h1>
+
+<p style="font-size:18px;color:#666;">
+Aguarde enquanto abrimos o WhatsApp.
+</p>
+
+<div class="bar">
+<div class="fill" id="barra"></div>
+</div>
+
+<div class="percent" id="percent">0%</div>
+
+</div>
+
+</body>
+</html>
